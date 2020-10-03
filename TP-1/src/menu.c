@@ -1,4 +1,6 @@
 #include "menu.h"
+#include "tst.h"
+#include "patricia.h"
 
 void print_menu1()
 {
@@ -61,7 +63,6 @@ void print_menu1()
     printf("|");
     printf("\n");
     printf("------------->");
-    printf("\n");
     fflush(stdin);
 }
 
@@ -105,8 +106,8 @@ void print_menu2()
     {
         fputs(" ", stdout);
     }
-    printf("Digite (1) Para Inserir Palavra, (2) Para Pesquisar Palavra");
-    for (i = 0; i < 42; i++)
+    printf("Digite (1) Para Inserir word, (2) Para Pesquisar Palavra");
+    for (i = 0; i < 45; i++)
     {
         fputs(" ", stdout);
     }
@@ -168,13 +169,68 @@ void print_menu2()
     printf("|");
     printf("\n");
     printf("------------->");
-    printf("\n");
     fflush(stdin);
 }
 
-void menu()
+void menu(TipoApontador p, TSTNode *root)
 {
+    int resp[2];
+    char word[MAX];
+    char search[MAX];
+    TipoRegistro aux;
+
     print_menu1();
-   
-    print_menu2();
+    scanf("%d", &resp[0]);
+    if (resp[0] == 1)
+        ;
+    else
+        inicializa(&p);
+    do
+    {
+
+        print_menu2();
+        scanf("%d", &resp[1]);
+
+        //opções para TST
+        if (resp[0] == 1 && resp[1] == 1)
+        {
+            printf("Digite a palavra que será inserida = ");
+            scanf("%s", word);
+            insert(&root, word);
+        }
+        if (resp[0] == 1 && resp[1] == 2)
+        {
+            printf("Digite a palavra que será pesquisada = ");
+            scanf("%s", search);
+            searchTST(root, search) ? printf("Encontrado\n") : printf("Não Encontrado\n");
+        }
+        if (resp[0] == 1 && resp[1] == 3)
+        {
+        }
+        if (resp[0] == 1 && resp[1] == 4)
+        {
+        }
+
+        //opções para PATRICIA
+        if (resp[0] == 2 && resp[1] == 1)
+        {
+            printf("Digite a palavra que será inserida = ");
+            scanf("%s", word);
+            aux.word = (*word);
+            insere(aux, &p);
+        }
+        if (resp[0] == 2 && resp[1] == 2)
+        {
+            printf("Digite a palavra que será pesquisada = ");
+            scanf("%s", search);
+            aux.word = (*search);
+            pesquisa(&aux, &p);
+        }
+        if (resp[0] == 2 && resp[1] == 3)
+        {
+        }
+        if (resp[0] == 2 && resp[1] == 4)
+        {
+        }
+    } while (resp[1] == 1 || resp[1] == 2 || resp[1] == 3 || resp[1] == 4);
 }
