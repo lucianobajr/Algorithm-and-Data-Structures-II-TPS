@@ -21,5 +21,4 @@ void traverseTSTUtil(TSTNodePointer root, char *buffer, int depth);
 void traverseTST(TSTNodePointer root);
 int searchTST(TSTNodePointer root, char *word);
 TSTNodePointer newNode(char data);
-
 #endif

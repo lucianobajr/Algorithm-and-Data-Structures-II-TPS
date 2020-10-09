@@ -91,3 +91,4 @@ int searchTST(TSTNodePointer root, char *word)
         return searchTST(root->eq, word + 1);
     }
 }
+
