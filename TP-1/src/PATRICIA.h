@@ -7,7 +7,7 @@
 #include <sys/time.h>
 #define D 10   /* depende de TipoChave *  
 #define Size 50 
-typedef char Key_Word[Size]; /* a definir, dependendo da aplicacao */
+typedef char Key_Word[Size]; 
 typedef unsigned short IndexType;
 typedef unsigned char TipoDib;
 typedef enum { 
