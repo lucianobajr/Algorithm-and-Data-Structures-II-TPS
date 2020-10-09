@@ -40,12 +40,12 @@ void insert(TSTNodePointer *root, char *word)
 }
 
 // Percorre TST
-void traverseTSTUtil(TSTNodePointer root, char *buffer, int depth)
+void printTSTUtil(TSTNodePointer root, char *buffer, int depth)
 {
     if (root)
     {
         // Primeira percorra a subárvore esquerda
-        traverseTSTUtil(root->left, buffer, depth);
+        printTSTUtil(root->left, buffer, depth);
 
         // Armazene o caráter deste nó
         buffer[depth] = root->character;
@@ -56,19 +56,19 @@ void traverseTSTUtil(TSTNodePointer root, char *buffer, int depth)
         }
 
         // Percorre subárvore do meio
-        traverseTSTUtil(root->eq, buffer, depth + 1);
+        printTSTUtil(root->eq, buffer, depth + 1);
 
         // Finalmente, Percorre a subárvore direita
-        traverseTSTUtil(root->right, buffer, depth);
+        printTSTUtil(root->right, buffer, depth);
     }
 }
 
 // Função principal pra percorrer TST
-// Encapsula traverseTSTUtil()
-void traverseTST(TSTNodePointer root)
+// Encapsula printTSTUtil()
+void printTST(TSTNodePointer root)
 {
     char buffer[MAX];
-    traverseTSTUtil(root, buffer, 0);
+    printTSTUtil(root, buffer, 0);
 }
 
 // Função para pesquisar uma determinada palavra no TST

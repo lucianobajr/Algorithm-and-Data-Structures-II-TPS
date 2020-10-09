@@ -206,7 +206,7 @@ void menu(TipoApontador p, TSTNode *root)
         }
         if (resp[0] == 1 && resp[1] == 3)
         {
-            traverseTST(root);
+            printTST(root);
         }
         if (resp[0] == 1 && resp[1] == 4)
         {

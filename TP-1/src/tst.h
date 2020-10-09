@@ -17,8 +17,8 @@ typedef struct TSTNode {
 } TSTNode;
 
 void insert(TSTNodePointer *root, char *word);
-void traverseTSTUtil(TSTNodePointer root, char *buffer, int depth);
-void traverseTST(TSTNodePointer root);
+void printTSTUtil(TSTNodePointer root, char *buffer, int depth);
+void printTST(TSTNodePointer root);
 int searchTST(TSTNodePointer root, char *word);
 TSTNodePointer newNode(char data);
 #endif
