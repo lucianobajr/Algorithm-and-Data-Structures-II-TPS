@@ -1,13 +1,12 @@
 
-// Falta comentar 
-//
+// falta comentar brief
 #include<stdlib.h>  
 #include <stdio.h> 
 #include <string.h>
 #include <sys/time.h>
-#define D 10   /* depende de TipoChave *  
+#define D 10    
 #define Size 50 
-typedef char Key_Word[Size]; 
+typedef char Key_Word[Size];
 typedef unsigned short IndexType;
 typedef unsigned char TipoDib;
 typedef enum { 
