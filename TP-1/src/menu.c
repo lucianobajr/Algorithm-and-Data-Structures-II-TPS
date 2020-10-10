@@ -209,7 +209,8 @@ void menu(TipoApontador p, TSTNode *root)
             printTST(root);
         }
         if (resp[0] == 1 && resp[1] == 4)
-        {
+    
+        {   printf("Quantidade de palavras na arvore: %d \n",root->contador);
         }
 
         //opções para PATRICIA

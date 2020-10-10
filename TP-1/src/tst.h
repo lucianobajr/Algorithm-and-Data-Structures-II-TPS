@@ -13,8 +13,11 @@ typedef struct TSTNode {
     data character;
     // Verdadeiro || 1 se este caractere for o último caractere de uma das palavras
     short isEndOfString : 1;
+    int contador;
     TSTNodePointer left,eq,right;
+    
 } TSTNode;
+
 
 void insert(TSTNodePointer *root, char *word);
 void printTSTUtil(TSTNodePointer root, char *buffer, int depth);
