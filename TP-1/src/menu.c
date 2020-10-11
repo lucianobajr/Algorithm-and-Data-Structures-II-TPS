@@ -1,6 +1,7 @@
 #include "menu.h"
 #include "tst.h"
 #include "patricia.h"
+#include "TSTinfo.h"
 
 void print_menu1()
 {
@@ -210,7 +211,9 @@ void menu(TipoApontador p, TSTNode *root)
         }
         if (resp[0] == 1 && resp[1] == 4)
     
-        {   printf("Quantidade de palavras na arvore: %d \n",root->contador);
+        {   
+            printf("Quantidade de palavras na arvore: %d \n",root->contador);
+            //CountWordsTST(root);  //funcao para contar as palavras                    XXXXXXXXXXXXXXXXXXX
         }
 
         //opções para PATRICIA
