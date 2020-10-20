@@ -1,5 +1,5 @@
 
-// Developed By Guilherme Aguiar  ... the other names 
+// Developed By Guilherme Aguiar,Luciano Belo  ... the other names 
 /// !!!!!!!!! Attention bitches !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // Put your names here guys, don't forget it  ˆˆˆ 
 //
