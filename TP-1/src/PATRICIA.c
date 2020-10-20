@@ -1,143 +1,143 @@
-#include "PATRICIA.h"
+#include "patricia.h"
 
-/****************************************************************************************************/
-short PATRICIA_External_Node_Verify(Pointer Node)
-{ /* Verifica se p^ e nodo externo */
-  return (Node->Type == External);
-} 
-/****************************************************************************************************/
-Pointer PATRICIA_Create_Internal_Node(Pointer *Left, Pointer *Right, int index, char compare) 
-{ 
-  Pointer P;  
-  P = (Pointer)malloc(sizeof(Node_Type));
-  P->Type = Internal; 
-  P->Node.Internal_Node.Left = *Left;
-  P->Node.Internal_Node.Right = *Right;   
-  P->Node.Internal_Node.Index = index;   
-  P->Node.Internal_Node.Char_to_Compare = compare ;  
-  return P;
-}   
-
-/****************************************************************************************************/
-// just create a new external node that contains, in this case, a word !  
-Pointer PATRICIA_Create_External_Node(Key_Word new_word, PATRICIA *P){
-  *P = (Pointer)malloc(sizeof(Node_Type)); 
-  (*P)->Type = External; 
-  strcpy((*P)->Node.Generic_Word,new_word); 
-  return *P; 
-}   
-
-/****************************************************************************************************/
-
-void PATRICIA_Node_Search(Key_Word Searched_Word, PATRICIA *P){ 
-    // its possible implement the height and comparison calculus here
-    int tam_word = strlen(Searched_Word);
-    if(PATRICIA_External_Node_Verify(P)){ 
-      if(strcmp(Searched_Word,(*P)->Node.Generic_Word) == 0 ){ 
-        printf("This word was been finded!\n"); 
-         return ; 
-      } 
-    } 
-    if(tam_word > (*P)->Node.Internal_Node.Index){ 
-      PATRICIA_Node_Search(Searched_Word, (*P)->Node.Internal_Node.Right); 
-      return  ;
-    } 
-    if(tam_word < (*P)->Node.Internal_Node.Index){ 
-      PATRICIA_Node_Search(Searched_Word, (*P)->Node.Internal_Node.Left);  
-      return ; 
-    } 
-    printf("The search was not succeeded... \n The word [%s] isn't in this tree",Searched_Word); 
-
-  
-} 
-
-/****************************************************************************************************/
-Pointer PATRICIA_Internal_Insert(Key_Word word, PATRICIA *P, short Index, char Distinct_char){ 
-   Pointer new_external_node = NULL;
-
-    if (PATRICIA_External_Node_Verify(*P)) { 
-
-        printf("The tree is void !\n ");
-        PATRICIA_Create_External_Node(word, &new_external_node); 
-        if (strcmp((*P)->Node.Generic_Word, word) < 0)      return (PATRICIA_Create_Internal_Node(P, &new_external_node, Index, Distinct_char));
-        else if (strcmp((*P)->Node.Generic_Word, word) > 0) return (PATRICIA_Create_Internal_Node(&new_external_node, P, Index, Distinct_char));     
-        return NULL;
-    
-    } 
-    else if (Index < (*P)->Node.Internal_Node.Index) {
-
-        PATRICIA_Create_External_Node(word, &new_external_node);
-        if (word[Index] < Distinct_char) return (PATRICIA_Create_Internal_Node(&new_external_node, P, Index, Distinct_char));
-        else return (PATRICIA_Create_Internal_Node(P, &new_external_node, Index, Distinct_char));
-        
-    } 
-    else { 
-
-        int Index_Changed = (*P)->Node.Internal_Node.Index;
-        
-        if (word[Index_Changed] < (*P)->Node.Internal_Node.Char_to_Compare) (*P)->Node.Internal_Node.Left = PATRICIA_Internal_Insert(word, &(*P)->Node.Internal_Node.Left, Index, Distinct_char);
-        else (*P)->Node.Internal_Node.Right = insertBetweenPatricia(word, &(*P)->Node.Internal_Node.Right, Index, Distinct_char);
-        
-        return (*P);
-    }
+void inicializa(TipoApontador *Dicionario)
+{
+  *Dicionario = NULL; //raiz da árvore
 }
 
-
-/****************************************************************************************************/
-Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree){ 
-  if(*tree == NULL){ 
-    printf("The First node that will be inserted, COOL !\n"); 
-    PATRICIA_Create_External_Node(word, tree); 
-  }  
-  // This tree already has some nodes 
-  else { 
-    PATRICIA P = *tree;  
-    int Aux_Index ; 
-    int Last_Index ; 
-    char aux_char ;  
-    // verify  all the internall nodes  
-    // later this part  can be implemented using PATRICIA search
-    while(!PATRICIA_External_Node_Verify(P)){ 
-    
-      Last_Index = P->Node.Internal_Node.Index;  
-      aux_char = word[P->Node.Internal_Node.Index]; 
-
-      if(aux_char < P->Node.Internal_Node.Char_to_Compare) P = P->Node.Internal_Node.Left;  
-      else if(aux_char >= P->Node.Internal_Node.Right) P = P->Node.Internal_Node.Right; 
-    
-    } 
-    if(strcmp(P->Node.Generic_Word,word) == 0){ 
-      printf("The tree already contain this node\n"); 
-      return (*tree);
-    } 
-    else { 
-      // the node is really new 
-      /**
-             * Trecho da função baseado no trio - Vitor Luís, Lucas Duarte e Vinícius Gabriel
-             * Copyright © 2018 UFV Florestal. All rights reserved.
-             */
-            char charDif;
-            
-            // verifica qual caracter é o diferente 
-            // Verifica qual palavra é a menor
-            int lowerSize = (strlen(word) < strlen(P->Node.Generic_Word)) ? strlen(word) : strlen(P->Node.Generic_Word);
-
-            for (Aux_Index = 0; Aux_Index <= lowerSize; Aux_Index++) {
-                if (word[Aux_Index] != P->Node.Generic_Word[Aux_Index]) {
-                    if (word[Aux_Index] < P->Node.Generic_Word[Aux_Index]) {
-                        charDif = P->Node.Generic_Word[Aux_Index];
-                        break;
-                    } else {
-                        charDif = word[Aux_Index];
-                        break;
-                    }
-                }
-            }
-
-            return PATRICIA_Internal_Insert(word, tree, index, charDif);
-    }
-     
+void insere(TipoRegistro x, TipoApontador *p)
+{
+  if (*p == NULL) //caso esteja vazio ensira na raiz
+  {
+    *p = (TipoApontador)malloc(sizeof(TipoNo));
+    (*p)->reg = x;
+    (*p)->esq = NULL;
+    (*p)->dir = NULL;
+    return;
   }
-}   
+  if (x.word < (*p)->reg.word)
+  {
+    insere(x, &(*p)->esq);
+    return;
+  }
+  if (x.word > (*p)->reg.word)
+    insere(x, &(*p)->dir);
+  else
+    printf("Erro:Registro já existe na árvore\n");
+}
 
-/****************************************************************************************************/
+void antecessor(TipoApontador q, TipoApontador *r)
+{
+  if ((*r)->dir != NULL)
+  {
+    antecessor(q, &(*r)->dir);
+    return;
+  }
+  q->reg = (*r)->reg;
+  q = *r;
+  *r = (*r)->esq;
+  free(q);
+}
+
+void retira(TipoRegistro x, TipoApontador *p)
+{
+  TipoApontador aux;
+  if (*p == NULL)
+  {
+    printf("Erro:Registro não está na arvore\n");
+    return;
+  }
+  if (x.word < (*p)->reg.word)
+  {
+    retira(x, &(*p)->esq);
+    return;
+  }
+  if (x.word > (*p)->reg.word)
+  {
+    retira(x, &(*p)->dir);
+    return;
+  }
+  if ((*p)->dir == NULL)
+  {
+    aux = *p;
+    *p = (*p)->esq;
+    free(aux);
+  }
+  if ((*p)->esq != NULL)
+  {
+    antecessor(*p, &(*p)->esq);
+    return;
+  }
+  aux = *p;
+  *p = (*p)->dir;
+  free(aux);
+}
+
+//percurso--transvercialização--ordem/infixa   (pré e pós)
+void ordem(TipoApontador p)
+{
+  if (p != NULL)
+  {
+    ordem(p->esq);
+    printf("%d\n", p->reg.word);
+    ordem(p->dir);
+  }
+}
+
+void preordem(TipoApontador p)
+{
+  if (p != NULL)
+  {
+    printf("%d\n", p->reg.word);
+    preordem(p->esq);
+    preordem(p->dir);
+  }
+}
+
+void posordem(TipoApontador p)
+{
+  if (p != NULL)
+  {
+    posordem(p->esq);
+    posordem(p->dir);
+    printf("%d\n", p->reg.word);
+  }
+}
+
+int altura(TipoApontador p)
+{
+  if (p == NULL)
+  {
+    return -1;
+  }
+  else
+  {
+    int he = altura(p->esq);
+    int hd = altura(p->dir);
+    if (he < hd)
+      return hd + 1;
+    else
+      return he + 1;
+  }
+}
+
+void pesquisa(TipoRegistro *x, TipoApontador *p)
+{
+  if (*p == NULL)
+  {
+    printf("Não Encontrado\n");
+    return;
+  }
+  if (x->word < (*p)->reg.word)
+  {
+    pesquisa(x, &(*p)->esq);
+    return;
+  }
+  if (x->word > (*p)->reg.word)
+    pesquisa(x, &(*p)->dir);
+  else
+  {
+    *x = (*p)->reg;
+    printf("Encontrado\n");
+  }
+}
