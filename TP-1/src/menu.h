@@ -3,11 +3,12 @@
 
 
 #include <string.h>
-#include "patricia.h"
-#include "tst.h"
+#include "PATRICIA/PATRICIA.h"
+#include "TST/tst.h"
 
 void print_menu1();
 void print_menu2();
-void menu(TipoApontador p,TSTNode *root);
+void print_menu3();
+void menu(PATRICIA Patricia_Tree,TSTNode *root);
 
 #endif

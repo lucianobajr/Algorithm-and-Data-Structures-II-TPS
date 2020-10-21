@@ -1,12 +1,10 @@
-#include "src/tst.h"
 #include "src/menu.h"
-#include "src/patricia.h"
 
 int main()
 {
     TSTNode *root = NULL;
-    TipoDicionario Dicionario;
-    menu(Dicionario,root);
+    PATRICIA Patricia_Tree = NULL;
+    menu(Patricia_Tree,root);
 
     return 0;
 }
