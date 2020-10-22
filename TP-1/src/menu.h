@@ -3,6 +3,7 @@
 
 
 #include <string.h>
+#include <time.h>
 #include "PATRICIA/PATRICIA.h"
 #include "TST/tst.h"
 
