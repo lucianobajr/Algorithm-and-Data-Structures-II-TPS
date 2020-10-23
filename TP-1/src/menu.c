@@ -14,200 +14,199 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
     print_menu1();
     scanf("%d", &resp[0]);
     if (resp[0] == 1)
-        ;
-    else
-        ;
-    do
     {
-
-        print_menu2();
-        scanf("%d", &resp[1]);
-
-        //opções para TST
-        if (resp[0] == 1 && resp[1] == 1)
+        do
         {
-            printf("Digite a palavra que será inserida = ");
-            scanf("%s", word);
-            inicio = clock();
-            insert(&root, word);
-            fim = clock();
-            tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-            printf("O TEMPO  GASTO PARA INSERIR A PALAVRA FOI DE %f segundos\n",tempo);
-        }
-        if (resp[0] == 1 && resp[1] == 2)
-        {
-            print_menu3();
-            scanf("%d", &resp[2]);
-            FILE *teste;
 
-            char *name;
-            char aux[50];
+            print_menu2();
+            scanf("%d", &resp[1]);
 
-            if (resp[2] == 1)
+            //opções para TST
+            if (resp[0] == 1 && resp[1] == 1)
             {
-                name = "./data/baby_shark.txt";
+                printf("Digite a palavra que será inserida = ");
+                scanf("%s", word);
+                inicio = clock();
+                insert(&root, word);
+                fim = clock();
+                tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+                printf("O TEMPO  GASTO PARA INSERIR A PALAVRA FOI DE %f segundos\n", tempo);
             }
-            else if (resp[2] == 2)
+            if (resp[0] == 1 && resp[1] == 2)
             {
-                name = "./data/the_scientist.txt";
-            }
-            else if (resp[2] == 3)
-            {
-                name = "./data/orpheus.txt";
-            }
-            else if (resp[2] == 4)
-            {
-                name = "./data/dic_1.txt";
-            }
-            else if (resp[2] == 5)
-            {
-                name = "./data/dic_2.txt";
-            }
-            else if (resp[2] == 6)
-            {
-                name = "./data/tianastacia.txt";
-            }
+                print_menu3();
+                scanf("%d", &resp[2]);
+                FILE *teste;
 
-            teste = fopen(name, "r");
-            if (teste == NULL)
-            {
-                printf("dando erro");
-            }
-            else
-            {
-                while (!feof(teste))
+                char *name;
+                char aux[50];
+
+                if (resp[2] == 1)
                 {
-                    if (resp[2] == 4 || resp[2] == 5)
-                    {
-                        fscanf(teste, "%s", aux);
-                    }
-                    else
-                    {
-                        fscanf(teste, "%s ", aux);
-                    }
-                    insert(&root, aux);
+                    name = "./data/baby_shark.txt";
                 }
-                fclose(teste);
-            }
-        }
-
-        if (resp[0] == 1 && resp[1] == 3)
-        {
-            printf("Digite a palavra que será pesquisada = ");
-            scanf("%s", search);
-            inicio = clock();
-            searchTST(root, search) ? printf("Encontrado\n") : printf("Não Encontrado\n");
-            fim = clock();
-            tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-            printf("O TEMPO  GASTO PARA PESQUISAR A PALAVRA FOI DE %f segundos\n", tempo);
-        }
-        if (resp[0] == 1 && resp[1] == 4)
-        {
-            printTST(root);
-        }
-        if (resp[0] == 1 && resp[1] == 5)
-        {
-            int counter = 0;
-            counterWords(root, &counter);
-            counter == 1 ? printf("%d PALAVRA INSERIDA\n", counter) : printf("%d PALAVRAS INSERIDAS\n", counter);
-        }
-
-        //opções para PATRICIA
-        Sats_Init(&S);
-        if (resp[0] == 2 && resp[1] == 1)
-        {
-            printf("Digite a palavra que será inserida = ");
-            scanf("%s", word);
-            inicio = clock();
-            Patricia_Tree = PATRICIA_Insert(word, &Patricia_Tree, &S);
-            fim = clock();
-            tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-            printf("O TEMPO  GASTO PARA INSERIR A PALAVRA FOI DE %f segundos\n", tempo);
-        }
-        if (resp[0] == 2 && resp[1] == 2)
-        {
-            print_menu3();
-            scanf("%d", &resp[2]);
-            FILE *teste;
-
-            char *name;
-            char aux[50];
-
-            if (resp[2] == 1)
-            {
-                name = "./data/baby_shark.txt";
-            }
-            else if (resp[2] == 2)
-            {
-                name = "./data/the_scientist.txt";
-            }
-            else if (resp[2] == 3)
-            {
-                name = "./data/orpheus.txt";
-            }
-            else if (resp[2] == 4)
-            {
-                name = "./data/dic_1.txt";
-            }
-            else if (resp[2] == 5)
-            {
-                name = "./data/dic_2.txt";
-            }
-
-            teste = fopen(name, "r");
-            if (teste == NULL)
-            {
-                printf("dando erro");
-            }
-            else
-            {
-                while (!feof(teste))
+                else if (resp[2] == 2)
                 {
-                    if (resp[2] == 4 || resp[2] == 5)
-                    {
-                        fscanf(teste, "%s", aux);
-                    }
-                    else
-                    {
-                        fscanf(teste, "%s ", aux);
-                    }
-                    Patricia_Tree = PATRICIA_Insert(aux, &Patricia_Tree, &S);
+                    name = "./data/the_scientist.txt";
                 }
-                fclose(teste);
-            }
-        }
-        if (resp[0] == 2 && resp[1] == 3)
-        {
-            int counter = 0;
-            PATRICIA_Counter_Words(Patricia_Tree, &counter);
+                else if (resp[2] == 3)
+                {
+                    name = "./data/orpheus.txt";
+                }
+                else if (resp[2] == 4)
+                {
+                    name = "./data/dic_1.txt";
+                }
+                else if (resp[2] == 5)
+                {
+                    name = "./data/dic_2.txt";
+                }
+                else if (resp[2] == 6)
+                {
+                    name = "./data/tianastacia.txt";
+                }
 
-            if (counter == 0)
-            {
-                printf("NENHUMA PALAVRA INSERIDA\n");
+                teste = fopen(name, "r");
+                if (teste == NULL)
+                {
+                    printf("dando erro");
+                }
+                else
+                {
+                    while (!feof(teste))
+                    {
+                        if (resp[2] == 4 || resp[2] == 5)
+                        {
+                            fscanf(teste, "%s", aux);
+                        }
+                        else
+                        {
+                            fscanf(teste, "%s ", aux);
+                        }
+                        insert(&root, aux);
+                    }
+                    fclose(teste);
+                }
             }
-            else
+
+            if (resp[0] == 1 && resp[1] == 3)
             {
                 printf("Digite a palavra que será pesquisada = ");
                 scanf("%s", search);
                 inicio = clock();
-                PATRICIA_Node_Search(search, &Patricia_Tree);
+                searchTST(root, search) ? printf("Encontrado\n") : printf("Não Encontrado\n");
                 fim = clock();
                 tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
                 printf("O TEMPO  GASTO PARA PESQUISAR A PALAVRA FOI DE %f segundos\n", tempo);
             }
-        }
-        if (resp[0] == 2 && resp[1] == 4)
+            if (resp[0] == 1 && resp[1] == 4)
+            {
+                printTST(root);
+            }
+            if (resp[0] == 1 && resp[1] == 5)
+            {
+                int counter = 0;
+                counterWords(root, &counter);
+                counter == 1 ? printf("%d PALAVRA INSERIDA\n", counter) : printf("%d PALAVRAS INSERIDAS\n", counter);
+            }
+        } while (resp[1] == 1 || resp[1] == 2 || resp[1] == 3 || resp[1] == 4 || resp[1] == 5);
+    }
+    else
+    {   
+        Sats_Init(&S);
+        do
         {
-            PATRICIA_Print_Alphabetical_Order(Patricia_Tree);
-        }
-        if (resp[0] == 2 && resp[1] == 5)
-        {
-            int counter = 0;
-            PATRICIA_Counter_Words(Patricia_Tree, &counter);
-            counter == 1 ? printf("%d PALAVRA INSERIDA\n", counter) : printf("%d PALAVRAS INSERIDAS\n", counter);
-        }
-        Stats_Print_Mount(S);
-    } while (resp[1] == 1 || resp[1] == 2 || resp[1] == 3 || resp[1] == 4 || resp[1] == 5);
+            print_menu2();
+            scanf("%d", &resp[1]);
+            //opções para PATRICIA
+           
+            if (resp[0] == 2 && resp[1] == 1)
+            {
+                printf("Digite a palavra que será inserida = ");
+                scanf("%s", word);
+                inicio = clock();
+                Patricia_Tree = PATRICIA_Insert(word, &Patricia_Tree, &S);
+                fim = clock();
+                tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+                printf("O TEMPO  GASTO PARA INSERIR A PALAVRA FOI DE %f segundos\n", tempo);
+            }
+            if (resp[0] == 2 && resp[1] == 2)
+            {
+                print_menu3();
+                scanf("%d", &resp[2]);
+                FILE *teste;
+
+                char *name;
+                char aux[50];
+
+                if (resp[2] == 1)
+                {
+                    name = "./data/baby_shark.txt";
+                }
+                else if (resp[2] == 2)
+                {
+                    name = "./data/the_scientist.txt";
+                }
+                else if (resp[2] == 3)
+                {
+                    name = "./data/orpheus.txt";
+                }
+                else if (resp[2] == 4)
+                {
+                    name = "./data/dic_1.txt";
+                }
+                else if (resp[2] == 5)
+                {
+                    name = "./data/dic_2.txt";
+                }
+
+                teste = fopen(name, "r");
+                if (teste == NULL)
+                {
+                    printf("dando erro");
+                }
+                else
+                {
+                    while (!feof(teste))
+                    {
+                        if (resp[2] == 4 || resp[2] == 5)
+                        {
+                            fscanf(teste, "%s", aux);
+                        }
+                        else
+                        {
+                            fscanf(teste, "%s ", aux);
+                        }
+                        Patricia_Tree = PATRICIA_Insert(aux, &Patricia_Tree, &S);
+                    }
+                    fclose(teste);
+                }
+            }
+            if (resp[0] == 2 && resp[1] == 3)
+            {
+                
+                    printf("Digite a palavra que será pesquisada = ");
+                    scanf("%s", search);
+                    inicio = clock();
+                    S.measure_words == 0 ? printf("Nenhuma Palavra Inserida\n") : PATRICIA_Node_Search(search, Patricia_Tree, &S);
+                    fim = clock();
+                    tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+                    printf("O TEMPO  GASTO PARA PESQUISAR A PALAVRA FOI DE %f segundos\n", tempo);
+                    
+            }
+            if (resp[0] == 2 && resp[1] == 4)
+            {
+                PATRICIA_Print_Alphabetical_Order(Patricia_Tree);
+            }
+            if (resp[0] == 2 && resp[1] == 5)
+            {
+               Stats_Print_Mount(S);
+               Stats_Print_Memory_Consumption(S);
+               Stats_Print_Comparisons_Insert(S);
+            }
+            
+        } while (resp[1] == 1 || resp[1] == 2 || resp[1] == 3 || resp[1] == 4 || resp[1] == 5);
+    }
 }
 
 void print_menu1()
