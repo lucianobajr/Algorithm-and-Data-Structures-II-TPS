@@ -7,7 +7,6 @@ TSTNodePointer newNode(char data)
     temp->character = data;
     temp->isEndOfString = 0;
     temp->left = temp->eq = temp->right = NULL;
-    temp->contador=0;
     return temp;
 }
 
@@ -22,24 +21,20 @@ void insert(TSTNodePointer *root, char *word)
     // insira esta palavra na subárvore esquerda da raiz
     if ((*word) < (*root)->character){
         insert(&((*root)->left), word);
-        (*root)->contador=(*root)->contador+1;
     }
     // Se o caractere atual da palavra for maior do que o caractere da raiz, 
     // então insira esta palavra na subárvore direita da raiz
     else if ((*word) > (*root)->character){
         insert(&((*root)->right), word);
-        (*root)->contador=(*root)->contador+1;
         }
     // Se o caractere atual da palavra for igual ao caractere da raiz,
     else
     {
         if (*(word + 1)){
             insert(&((*root)->eq), word + 1);
-        (*root)->contador=(*root)->contador+1;
         }
         // último caractere da palavra
         else{
-            (*root)->contador=(*root)->contador+1;
             (*root)->isEndOfString = 1;
             }
             
@@ -96,5 +91,29 @@ int searchTST(TSTNodePointer root, char *word)
             return root->isEndOfString;
 
         return searchTST(root->eq, word + 1);
+    }
+}
+
+int counterWords(TSTNodePointer root,int *counter)
+{
+    counterWordsUtil(root, counter, 0);
+}
+
+void counterWordsUtil(TSTNodePointer root, int *counter, int depth)
+{
+    if (root)
+    {
+        // Primeira percorra a subárvore esquerda
+        counterWordsUtil(root->left,counter ,depth);
+        if (root->isEndOfString)
+        {
+            (*counter)++;
+        }
+
+        // Percorre subárvore do meio
+        counterWordsUtil(root->eq,counter ,depth + 1);
+
+        // Finalmente, Percorre a subárvore direita
+        counterWordsUtil(root->right,counter ,depth);
     }
 }
