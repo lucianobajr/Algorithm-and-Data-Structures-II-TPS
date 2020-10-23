@@ -337,7 +337,7 @@ void print_menu2()
     {
         fputs(" ", stdout);
     }
-    printf(" (4) Para Exibir Todas as Palavras em Ordem Alfabética, (5) Para Contar as Palavras ou");
+    printf(" (4) Para Exibir Todas as Palavras em Ordem Alfabética, (5) Para exibir todas as estatísticas da árvore ou");
     for (i = 0; i < 32; i++)
     {
         fputs(" ", stdout);
