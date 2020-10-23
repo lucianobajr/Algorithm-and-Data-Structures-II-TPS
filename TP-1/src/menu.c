@@ -122,7 +122,8 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
             Patricia_Tree = PATRICIA_Insert(word, &Patricia_Tree, &S);
             fim = clock();
             tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-            printf("O TEMPO  GASTO PARA INSERIR A PALAVRA FOI DE %f segundos\n", tempo);
+            printf("O TEMPO  GASTO PARA INSERIR A PALAVRA FOI DE %f segundos\n", tempo); 
+            S.measure_time.time_insertion+= tempo;
         }
         if (resp[0] == 2 && resp[1] == 2)
         {
@@ -190,10 +191,11 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
                 printf("Digite a palavra que será pesquisada = ");
                 scanf("%s", search);
                 inicio = clock();
-                PATRICIA_Node_Search(search, &Patricia_Tree);
+                PATRICIA_Node_Search(search, Patricia_Tree,&S);
                 fim = clock();
                 tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-                printf("O TEMPO  GASTO PARA PESQUISAR A PALAVRA FOI DE %f segundos\n", tempo);
+                printf("O TEMPO  GASTO PARA PESQUISAR A PALAVRA FOI DE %f segundos\n", tempo); 
+                S.measure_time.time_search+= tempo; 
             }
         }
         if (resp[0] == 2 && resp[1] == 4)
