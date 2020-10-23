@@ -1,3 +1,4 @@
+#include <stdio.h>
 
 // THIS FILE IS WILL USE TO QUANTIFY SOME MEASURES OF THE PATRICIA TREE
 typedef struct{ 

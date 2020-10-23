@@ -19,10 +19,12 @@ Pointer PATRICIA_Create_Internal_Node(Pointer *Left, Pointer *Right, int index, 
 
 /****************************************************************************************************/
 // just create a new external node that contains, in this case, a word !
-Pointer PATRICIA_Create_External_Node(Key_Word new_word, PATRICIA *P)
+Pointer PATRICIA_Create_External_Node(Key_Word new_word, PATRICIA *P, PATRICIA_Stats *S)
 {
   *P = (Pointer)malloc(sizeof(Node_Type));
   (*P)->Type = External;
+  (*S).measure_words++;
+  printf(" NUM: %d\n", (*S).measure_words);
   strcpy((*P)->Node.Generic_Word, new_word);
   return *P;
 }
@@ -33,11 +35,6 @@ void PATRICIA_Node_Search(Key_Word Searched_Word, PATRICIA *P)
 {
   // its possible implement the height and comparison calculus here
   int tam_word = strlen(Searched_Word);
-  if (P == NULL)
-  {
-      printf("Without any word insert!\n");
-      return;
-  }
   if (PATRICIA_External_Node_Verify(*P))
   {
     if (strcmp(Searched_Word, (*P)->Node.Generic_Word) == 0)
@@ -60,14 +57,14 @@ void PATRICIA_Node_Search(Key_Word Searched_Word, PATRICIA *P)
 }
 
 /****************************************************************************************************/
-Pointer PATRICIA_Internal_Insert(Key_Word word, PATRICIA *P, short Index, char Distinct_char)
+Pointer PATRICIA_Internal_Insert(Key_Word word, PATRICIA *P, short Index, char Distinct_char, PATRICIA_Stats *S)
 {
   Pointer new_external_node = NULL;
 
   if (PATRICIA_External_Node_Verify(*P))
   {
 
-    PATRICIA_Create_External_Node(word, &new_external_node);
+    PATRICIA_Create_External_Node(word, &new_external_node, S);
     if (strcmp((*P)->Node.Generic_Word, word) < 0)
       return (PATRICIA_Create_Internal_Node(P, &new_external_node, Index, Distinct_char));
     else if (strcmp((*P)->Node.Generic_Word, word) > 0)
@@ -77,7 +74,7 @@ Pointer PATRICIA_Internal_Insert(Key_Word word, PATRICIA *P, short Index, char D
   else if (Index < (*P)->Node.Internal_Node.Index)
   {
 
-    PATRICIA_Create_External_Node(word, &new_external_node);
+    PATRICIA_Create_External_Node(word, &new_external_node, S);
     if (word[Index] < Distinct_char)
       return (PATRICIA_Create_Internal_Node(&new_external_node, P, Index, Distinct_char));
     else
@@ -89,22 +86,22 @@ Pointer PATRICIA_Internal_Insert(Key_Word word, PATRICIA *P, short Index, char D
     int Index_Changed = (*P)->Node.Internal_Node.Index;
 
     if (word[Index_Changed] < (*P)->Node.Internal_Node.Char_to_Compare)
-      (*P)->Node.Internal_Node.Left = PATRICIA_Internal_Insert(word, &(*P)->Node.Internal_Node.Left, Index, Distinct_char);
+      (*P)->Node.Internal_Node.Left = PATRICIA_Internal_Insert(word, &(*P)->Node.Internal_Node.Left, Index, Distinct_char, S);
     else
-      (*P)->Node.Internal_Node.Right = PATRICIA_Internal_Insert(word, &(*P)->Node.Internal_Node.Right, Index, Distinct_char);
+      (*P)->Node.Internal_Node.Right = PATRICIA_Internal_Insert(word, &(*P)->Node.Internal_Node.Right, Index, Distinct_char, S);
 
     return (*P);
   }
 }
 
 /****************************************************************************************************/
-Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree)
+Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree, PATRICIA_Stats *S)
 {
-  printf("Enter here !\n");
+  printf("Enter here !");
   if (*tree == NULL)
   {
     printf("The First node that will be inserted, COOL !\n");
-    return PATRICIA_Create_External_Node(word, tree);
+    return PATRICIA_Create_External_Node(word, tree, S);
   }
   // This tree already has some nodes
   else
@@ -163,7 +160,7 @@ Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree)
         }
       }
 
-      return PATRICIA_Internal_Insert(word, tree, Aux_Index, charDif);
+      return PATRICIA_Internal_Insert(word, tree, Aux_Index, charDif, S);
     }
   }
 }
