@@ -1,41 +1,48 @@
 #include "tst.h"
 
 // cria Nó da TST
-TSTNodePointer newNode(char data)
-{
-    TSTNode *temp = (struct TSTNode *)malloc(sizeof(TSTNode));
+TSTNodePointer newNode(char data, TST_Stats *T_S)
+{   
+    struct rusage resource_usage;
+    TSTNode *temp = (struct TSTNode *)malloc(sizeof(TSTNode)); 
+    int ret = getrusage(RUSAGE_SELF, &resource_usage);
+    if (ret == 0) (*T_S).measure_memory += resource_usage.ru_maxrss;
+  
     temp->character = data;
     temp->isEndOfString = 0;
     temp->left = temp->eq = temp->right = NULL;
-    temp->contador=0;
+    temp->contador=0; 
+    (*T_S).measure_words+= 1;
     return temp;
 }
 
 // insere uma nova palavra na TST
-void insert(TSTNodePointer *root, char *word)
+void insert(TSTNodePointer *root, char *word, TST_Stats *T_S)
 {
     // Caso Base: Árvore está vazia
     if (!(*root))
-        *root = newNode(*word);
+        *root = newNode(*word,T_S);
 
     // Se o caractere atual da palavra for menor que o caractere da raiz,
     // insira esta palavra na subárvore esquerda da raiz
-    if ((*word) < (*root)->character){
-        insert(&((*root)->left), word);
+    if ((*word) < (*root)->character){ 
+        (*T_S).measure_comparisons_insert.Compare_insert_char+=1 ;
+        insert(&((*root)->left), word,T_S);
         (*root)->contador=(*root)->contador+1;
     }
     // Se o caractere atual da palavra for maior do que o caractere da raiz, 
     // então insira esta palavra na subárvore direita da raiz
     else if ((*word) > (*root)->character){
-        insert(&((*root)->right), word);
+        (*T_S).measure_comparisons_insert.Compare_insert_char+=1 ;
+        insert(&((*root)->right), word,T_S);
         (*root)->contador=(*root)->contador+1;
         }
     // Se o caractere atual da palavra for igual ao caractere da raiz,
     else
-    {
+    {   
         if (*(word + 1)){
-            insert(&((*root)->eq), word + 1);
-        (*root)->contador=(*root)->contador+1;
+            insert(&((*root)->eq), word + 1,T_S);
+            (*root)->contador=(*root)->contador+1;
         }
         // último caractere da palavra
         else{
@@ -79,23 +86,28 @@ void printTST(TSTNodePointer root)
 }
 
 // Função para pesquisar uma determinada palavra no TST
-int searchTST(TSTNodePointer root, char *word)
+int searchTST(TSTNodePointer root, char *word, TST_Stats *T_S)
 {
     if (!root)
         return 0;
 
-    if (*word < (root)->character)
-        return searchTST(root->left, word);
+    if (*word < (root)->character){  
+        (*T_S).measure_comparisons_search +=1 ;
+        return searchTST(root->left, word,T_S);
 
-    else if (*word > (root)->character)
-        return searchTST(root->right, word);
+    }
+        
+    else if (*word > (root)->character){ 
+        (*T_S).measure_comparisons_search+=1 ; 
+        return searchTST(root->right, word, T_S);
+    }
 
     else
-    {
+    {   (*T_S).measure_comparisons_search+=1 ; 
         if (*(word + 1) == '\0')
             return root->isEndOfString;
 
-        return searchTST(root->eq, word + 1);
+        return searchTST(root->eq, word + 1, T_S);
     }
 }
 
