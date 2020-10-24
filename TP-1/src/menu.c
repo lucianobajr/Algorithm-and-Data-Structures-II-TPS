@@ -107,9 +107,9 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
             }
             if (resp[0] == 1 && resp[1] == 5)
             {
-                int counter = 0;
-                counterWords(root, &counter);
-                counter == 1 ? printf("%d PALAVRA INSERIDA\n", counter) : printf("%d PALAVRAS INSERIDAS\n", counter);
+                //int counter = 0;
+                counterWords(root, &T_S);
+                //counter == 1 ? printf("%d PALAVRA INSERIDA\n", counter) : printf("%d PALAVRAS INSERIDAS\n", counter);
                 TST_Stats_Print_Mount(T_S);  
                 TST_Stats_Print_Memory_Consumption(T_S); 
                 TST_Stats_Print_Comparisons_Search(T_S);

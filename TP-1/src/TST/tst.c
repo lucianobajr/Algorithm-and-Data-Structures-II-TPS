@@ -12,7 +12,6 @@ TSTNodePointer newNode(char data, TST_Stats *T_S)
     temp->isEndOfString = 0;
     temp->left = temp->eq = temp->right = NULL;
     temp->contador=0; 
-    (*T_S).measure_words+= 1;
     return temp;
 }
 
@@ -111,28 +110,28 @@ int searchTST(TSTNodePointer root, char *word, TST_Stats *T_S)
     }
 }
 
-int counterWords(TSTNodePointer root,int *counter)
+int counterWords(TSTNodePointer root, TST_Stats *T_S)
 {
-    counterWordsUtil(root, counter, 0);
+    counterWordsUtil(root, 0, T_S);
 }
 
-void counterWordsUtil(TSTNodePointer root, int *counter, int depth)
+void counterWordsUtil(TSTNodePointer root,  int depth, TST_Stats *T_S)
 {
     if (root)
     {
         // Primeira percorra a subárvore esquerda
-        counterWordsUtil(root->left,counter ,depth);
+        counterWordsUtil(root->left ,depth, T_S);
 
         // Armazene o caráter deste nó
         if (root->isEndOfString)
         {
-            (*counter)++;
+            (*T_S).measure_words+=1 ; 
         }
 
         // Percorre subárvore do meio
-        counterWordsUtil(root->eq,counter ,depth + 1);
+        counterWordsUtil(root->eq ,depth + 1,T_S);
 
         // Finalmente, Percorre a subárvore direita
-        counterWordsUtil(root->right,counter ,depth);
+        counterWordsUtil(root->right ,depth,T_S);
     }
 }

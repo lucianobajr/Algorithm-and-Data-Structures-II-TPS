@@ -24,7 +24,7 @@ void insert(TSTNodePointer *root, char *word,TST_Stats *T_S);
 void printTSTUtil(TSTNodePointer root, char *buffer, int depth);
 void printTST(TSTNodePointer root);
 int searchTST(TSTNodePointer root, char *word,TST_Stats *T_S);
-int counterWords(TSTNodePointer root,int *counter);
-void counterWordsUtil(TSTNodePointer root, int *counter, int depth);
+int counterWords(TSTNodePointer root,  TST_Stats *T_S);
+void counterWordsUtil(TSTNodePointer root, int depth,  TST_Stats *T_S);
 TSTNodePointer newNode(char data,TST_Stats *T_S);
 #endif
