@@ -107,7 +107,8 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
             }
             if (resp[0] == 1 && resp[1] == 5)
             {
-                //int counter = 0;
+                //int counter = 0; 
+                // this function is being used to count the words and passed this to the stats 
                 counterWords(root, &T_S);
                 //counter == 1 ? printf("%d PALAVRA INSERIDA\n", counter) : printf("%d PALAVRAS INSERIDAS\n", counter);
                 TST_Stats_Print_Mount(T_S);  
