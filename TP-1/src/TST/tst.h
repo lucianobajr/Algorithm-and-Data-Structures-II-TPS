@@ -25,6 +25,6 @@ void printTSTUtil(TSTNodePointer root, char *buffer, int depth);
 void printTST(TSTNodePointer root);
 int searchTST(TSTNodePointer root, char *word,TST_Stats *T_S);
 int counterWords(TSTNodePointer root,  TST_Stats *T_S);
-void counterWordsUtil(TSTNodePointer root, int depth,  TST_Stats *T_S);
+int counterWordsUtil(TSTNodePointer root,  int depth,int *counter);
 TSTNodePointer newNode(char data,TST_Stats *T_S);
 #endif

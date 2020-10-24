@@ -13,26 +13,20 @@ void Sats_Init(PATRICIA_Stats *S){
     } 
 /***************************************************************************************************************************************/
 void Stats_Print_Mount(PATRICIA_Stats S){ 
-    printf("\nNumber of words in this tree:  %d\n", S.measure_words);
+    printf("\nNúmero de palavras nesta árvore:  %d\n", S.measure_words);
 } 
 /****************************************************************************************************************************************/ 
 void Stats_Print_Memory_Consumption(PATRICIA_Stats S){ 
-    printf("\nTotal of memory consumption:  %ld  kilobytes\n", S.measure_memory);
+    printf("\nConsumo total de memória:  %ld  kilobytes\n", S.measure_memory);
 }  
 /****************************************************************************************************************************************/ 
 void  Stats_Print_Comparisons_Search(PATRICIA_Stats S){ 
-    printf("\nTotal of comparison in the search:  %ld  \n", S.measure_comparisons_search);   
+    printf("\nTotal de comparações na pesquisa:  %ld  \n", S.measure_comparisons_search);   
 }
 /*****************************************************************************************************************************************/  
 void  Stats_Print_Comparisons_Insert(PATRICIA_Stats S){ 
-    printf("\nTotal of char comparison  in the insertion:  %ld  \n", S.measure_comparisons_insert.Compare_insert_char);    
-    printf("\nTotal of index's comparison  in the insertion:  %ld  \n", S.measure_comparisons_insert.Compare_insert_index);  
-    printf("\nTotal of internal's node comparison  in the insertion:  %ld  \n", S.measure_comparisons_insert.Compare_insert_internal_node);  
-    printf("\nTotal of external's node comparison  in the insertion:  %ld  \n", S.measure_comparisons_insert.Compare_insert_external_node);  
-    
-}
-void Stats_Print_Time(PATRICIA_Stats S){ 
-    printf("\nTotal of time spent in the insertion:  %f  \n", S.measure_time.time_insertion);  
-    printf("\nTotal of time spent in the search:  %lf  \n", S.measure_time.time_search);  
-    
+    printf("\nTotal de comparações de caracteres na inserção:  %ld  \n", S.measure_comparisons_insert.Compare_insert_char);    
+    printf("\nTotal de comparações de índices na inserção:  %ld  \n", S.measure_comparisons_insert.Compare_insert_index);  
+    printf("\nTotal de comparações de nó interno na inserção:  %ld  \n", S.measure_comparisons_insert.Compare_insert_internal_node);  
+    printf("\nTotal de comparações de nó externo na inserção:  %ld  \n", S.measure_comparisons_insert.Compare_insert_external_node);  
 }

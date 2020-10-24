@@ -1,11 +1,11 @@
 lampada
-folha
+foLha
 banheiro
 mascara
-guardar
+GUARDAR
 caneca
 fumaça
-barro
+BaRrO
 vermelho
 manga
 poste

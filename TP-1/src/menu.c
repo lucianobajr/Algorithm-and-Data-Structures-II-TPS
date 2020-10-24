@@ -27,11 +27,12 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
             {
                 printf("Digite a palavra que será inserida = ");
                 scanf("%s", word);
+                lower(word);
                 inicio = clock();
                 insert(&root, word, &T_S);
                 fim = clock();
                 tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-                printf("O TEMPO  GASTO PARA INSERIR A PALAVRA FOI DE %f segundos\n", tempo);
+                printf("O TEMPO  GASTO PARA INSERIR A PALAVRA FOI DE %fs\n", tempo);
                 T_S.measure_time.time_insertion+=tempo; 
             }
             if (resp[0] == 1 && resp[1] == 2)
@@ -75,6 +76,7 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
                 }
                 else
                 {
+                    inicio = clock();
                     while (!feof(teste))
                     {
                         if (resp[2] == 4 || resp[2] == 5)
@@ -85,9 +87,14 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
                         {
                             fscanf(teste, "%s ", aux);
                         }
+                        lower(aux);
                         insert(&root, aux,&T_S);
                     }
                     fclose(teste);
+                    fim = clock();
+                    tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+                    printf("O TEMPO  GASTO PARA LER O ARQUIVO E INSERIR AS PALAVRAS FOI DE %fs\n", tempo);
+                    T_S.measure_time.time_insertion+=tempo; 
                 }
             }
 
@@ -99,7 +106,8 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
                 searchTST(root, search,&T_S) ? printf("Encontrado\n") : printf("Não Encontrado\n");
                 fim = clock();
                 tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-                printf("O TEMPO  GASTO PARA PESQUISAR A PALAVRA FOI DE %f segundos\n", tempo);
+                printf("O TEMPO  GASTO PARA PESQUISAR A PALAVRA FOI DE %fs\n", tempo);
+                T_S.measure_time.time_search+=tempo; 
             }
             if (resp[0] == 1 && resp[1] == 4)
             {
@@ -107,14 +115,14 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
             }
             if (resp[0] == 1 && resp[1] == 5)
             {
-                //int counter = 0; 
-                // this function is being used to count the words and passed this to the stats 
+               
                 counterWords(root, &T_S);
-                //counter == 1 ? printf("%d PALAVRA INSERIDA\n", counter) : printf("%d PALAVRAS INSERIDAS\n", counter);
                 TST_Stats_Print_Mount(T_S);  
                 TST_Stats_Print_Memory_Consumption(T_S); 
                 TST_Stats_Print_Comparisons_Search(T_S);
                 TST_Stats_Print_Comparisons_Insert(T_S);
+                printf("\nTempo total gasto na Inserção:  %lfs  \n",T_S.measure_time.time_insertion);  
+                printf("\nTempo total gasto na Pesquisa:  %lfs  \n", T_S.measure_time.time_search);  
             }
         } while (resp[1] == 1 || resp[1] == 2 || resp[1] == 3 || resp[1] == 4 || resp[1] == 5);
     }
@@ -131,11 +139,12 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
             {
                 printf("Digite a palavra que será inserida = ");
                 scanf("%s", word);
+                lower(word);
                 inicio = clock();
                 Patricia_Tree = PATRICIA_Insert(word, &Patricia_Tree, &S);
                 fim = clock();
                 tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-                printf("O TEMPO  GASTO PARA INSERIR A PALAVRA FOI DE %f segundos\n", tempo);
+                printf("O TEMPO  GASTO PARA INSERIR A PALAVRA FOI DE %fs\n", tempo);
                 S.measure_time.time_insertion += tempo;
             }
             if (resp[0] == 2 && resp[1] == 2)
@@ -174,7 +183,8 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
                     printf("dando erro");
                 }
                 else
-                {
+                { 
+                    inicio = clock();
                     while (!feof(teste))
                     {
                         if (resp[2] == 4 || resp[2] == 5)
@@ -185,9 +195,14 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
                         {
                             fscanf(teste, "%s ", aux);
                         }
+                        lower(aux);
                         Patricia_Tree = PATRICIA_Insert(aux, &Patricia_Tree, &S);
                     }
                     fclose(teste);
+                    fim = clock();
+                    tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+                    printf("O TEMPO  GASTO PARA LER O ARQUIVO E INSERIR AS PALAVRAS FOI DE %fs\n", tempo);
+                    S.measure_time.time_insertion+=tempo;
                 }
             }
             if (resp[0] == 2 && resp[1] == 3)
@@ -199,7 +214,7 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
                     S.measure_words == 0 ? printf("Nenhuma Palavra Inserida\n") : PATRICIA_Node_Search(search, Patricia_Tree, &S);
                     fim = clock();
                     tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-                    printf("O TEMPO  GASTO PARA PESQUISAR A PALAVRA FOI DE %f segundos\n", tempo); 
+                    printf("O TEMPO  GASTO PARA PESQUISAR A PALAVRA FOI DE %fs\n", tempo); 
                     S.measure_time.time_search+=tempo; 
                     
             }
@@ -212,9 +227,17 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
                Stats_Print_Mount(S);
                Stats_Print_Memory_Consumption(S);
                Stats_Print_Comparisons_Insert(S);
+               printf("\nTempo total gasto na Inserção:  %lfs  \n", S.measure_time.time_insertion);  
+               printf("\nTempo total gasto na Pesquisa:  %lfs  \n", S.measure_time.time_search);  
             }
             
         } while (resp[1] == 1 || resp[1] == 2 || resp[1] == 3 || resp[1] == 4 || resp[1] == 5);
+    }
+}
+
+char *lower(char *word){
+    for(int i=0;i<strlen(word);i++){
+        word[i] = tolower(word[i]);
     }
 }
 
@@ -342,11 +365,11 @@ void print_menu2()
     printf("|\n");
     printf("|");
 
-    for (i = 0; i < 45; i++)
+    for (i = 0; i < 40; i++)
     {
         fputs(" ", stdout);
     }
-    printf(" (4) Para Exibir Todas as Palavras em Ordem Alfabética, (5) Para exibir todas as estatísticas da árvore ou");
+    printf(" (4) Para Exibir Todas as Palavras em Ordem Alfabética, (5) Para Mostrar as Estatísticas ou");
     for (i = 0; i < 32; i++)
     {
         fputs(" ", stdout);

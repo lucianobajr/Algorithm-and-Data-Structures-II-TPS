@@ -112,26 +112,29 @@ int searchTST(TSTNodePointer root, char *word, TST_Stats *T_S)
 
 int counterWords(TSTNodePointer root, TST_Stats *T_S)
 {
-    counterWordsUtil(root, 0, T_S);
+    int counter = 0;
+    (*T_S).measure_words = counterWordsUtil(root, 0, &counter);
 }
 
-void counterWordsUtil(TSTNodePointer root,  int depth, TST_Stats *T_S)
+int counterWordsUtil(TSTNodePointer root,  int depth,int *counter)
 {
     if (root)
     {
         // Primeira percorra a subárvore esquerda
-        counterWordsUtil(root->left ,depth, T_S);
+        counterWordsUtil(root->left ,depth,counter);
 
         // Armazene o caráter deste nó
         if (root->isEndOfString)
         {
-            (*T_S).measure_words+=1 ; 
+            (*counter)++;
         }
 
         // Percorre subárvore do meio
-        counterWordsUtil(root->eq ,depth + 1,T_S);
+        counterWordsUtil(root->eq ,depth + 1,counter);
 
         // Finalmente, Percorre a subárvore direita
-        counterWordsUtil(root->right ,depth,T_S);
+        counterWordsUtil(root->right ,depth,counter);
     }
+
+    return *counter;
 }
