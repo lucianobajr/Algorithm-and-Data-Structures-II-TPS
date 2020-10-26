@@ -1,3 +1,17 @@
+/*
+   *    ==============GRUPO R2D2==============
+   *    =                                    =    
+   *    =       Cláudio Barbosa  - 3492      =
+   *    =                                    =
+   *    =       Guilherme Aguiar - 3496      =
+   *    =                                    =
+   *    =       Mateus Aparecido - 3858      =
+   *    =                                    = 
+   *    =       Luciano Belo     - 3897      =
+   *    =                                    =  
+   *    ======================================
+*/
+
 #include "tst.h"
 
 // cria Nó da TST

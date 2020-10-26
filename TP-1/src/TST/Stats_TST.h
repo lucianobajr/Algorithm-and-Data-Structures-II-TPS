@@ -1,3 +1,20 @@
+/*
+   *    ==============GRUPO R2D2==============
+   *    =                                    =    
+   *    =       Cláudio Barbosa  - 3492      =
+   *    =                                    =
+   *    =       Guilherme Aguiar - 3496      =
+   *    =                                    =
+   *    =       Mateus Aparecido - 3858      =
+   *    =                                    = 
+   *    =       Luciano Belo     - 3897      =
+   *    =                                    =  
+   *    ======================================
+*/
+
+#ifndef STATS_TST_h
+#define STATS_TST_h
+
 
 // THIS FILE IS WILL USE TO QUANTIFY SOME MEASURES OF THE PATRICIA TREE
 #include <sys/resource.h>
@@ -33,3 +50,4 @@ void TST_Stats_Print_Mount(TST_Stats S);
 void TST_Stats_Print_Memory_Consumption(TST_Stats S); 
 void TST_Stats_Print_Comparisons_Search(TST_Stats S);
 void TST_Stats_Print_Comparisons_Insert(TST_Stats S);
+#endif

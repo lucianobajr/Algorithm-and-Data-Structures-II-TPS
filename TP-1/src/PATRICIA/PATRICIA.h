@@ -1,8 +1,20 @@
+/*
+   *    ==============GRUPO R2D2==============
+   *    =                                    =    
+   *    =       Cláudio Barbosa  - 3492      =
+   *    =                                    =
+   *    =       Guilherme Aguiar - 3496      =
+   *    =                                    =
+   *    =       Mateus Aparecido - 3858      =
+   *    =                                    = 
+   *    =       Luciano Belo     - 3897      =
+   *    =                                    =  
+   *    ======================================
+*/
 
-// Developed By Guilherme Aguiar  ... the other names 
-/// !!!!!!!!! Attention bitches !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// Put your names here guys, don't forget it  ˆˆˆ 
-//
+#ifndef PATRICIA_h
+#define PATRICIA_h
+
 #include<stdlib.h>  
 #include <stdio.h> 
 #include <string.h>
@@ -76,3 +88,4 @@ Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree, PATRICIA_Stats *S);
  **/  
 void PATRICIA_Print_Alphabetical_Order(PATRICIA P);
 
+#endif
