@@ -36,6 +36,6 @@ void  TST_Stats_Print_Comparisons_Search(TST_Stats T_S){
 }
 /*****************************************************************************************************************************************/  
 void  TST_Stats_Print_Comparisons_Insert(TST_Stats T_S){ 
-    printf("\nTotal de comparações de caracteres na inserção  %ld  \n", T_S.measure_comparisons_insert.Compare_insert_char);    
+    printf("\nTotal de comparações de caracteres na inserção: %ld  \n", T_S.measure_comparisons_insert.Compare_insert_char);    
     
 }

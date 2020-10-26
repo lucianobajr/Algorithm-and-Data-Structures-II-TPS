@@ -25,7 +25,7 @@ TSTNodePointer newNode(char data, TST_Stats *T_S)
     temp->character = data;
     temp->isEndOfString = 0;
     temp->left = temp->eq = temp->right = NULL;
-    temp->contador=0; 
+   
     return temp;
 }
 
@@ -41,28 +41,26 @@ void insert(TSTNodePointer *root, char *word, TST_Stats *T_S)
     if ((*word) < (*root)->character){ 
         (*T_S).measure_comparisons_insert.Compare_insert_char+=1 ;
         insert(&((*root)->left), word,T_S);
-        (*root)->contador=(*root)->contador+1;
+        
     }
     // Se o caractere atual da palavra for maior do que o caractere da raiz, 
     // então insira esta palavra na subárvore direita da raiz
     else if ((*word) > (*root)->character){
         (*T_S).measure_comparisons_insert.Compare_insert_char+=1 ;
         insert(&((*root)->right), word,T_S);
-        (*root)->contador=(*root)->contador+1;
+
         }
     // Se o caractere atual da palavra for igual ao caractere da raiz,
     else
     {   
         if (*(word + 1)){
             insert(&((*root)->eq), word + 1,T_S);
-            (*root)->contador=(*root)->contador+1;
+            
         }
         // último caractere da palavra
         else{
-            (*root)->contador=(*root)->contador+1;
             (*root)->isEndOfString = 1;
-            }
-            
+        }   
     }
 }
 
