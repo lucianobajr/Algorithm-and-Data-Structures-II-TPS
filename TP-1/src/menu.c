@@ -176,6 +176,10 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
                 {
                     name = "./data/dic_2.txt";
                 }
+                else if (resp[2] == 6)
+                {
+                    name = "./data/tianastacia.txt";
+                }
 
                 teste = fopen(name, "r");
                 if (teste == NULL)
@@ -227,6 +231,7 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
                Stats_Print_Mount(S);
                Stats_Print_Memory_Consumption(S);
                Stats_Print_Comparisons_Insert(S);
+               Stats_Print_Comparisons_Search(S);
                printf("\nTempo total gasto na Inserção:  %lfs  \n", S.measure_time.time_insertion);  
                printf("\nTempo total gasto na Pesquisa:  %lfs  \n", S.measure_time.time_search);  
             }
