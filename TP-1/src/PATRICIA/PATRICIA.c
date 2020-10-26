@@ -216,7 +216,7 @@ Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree, PATRICIA_Stats *S)
         if (word[Aux_Index] != P->Node.Generic_Word[Aux_Index])
         {
           if (word[Aux_Index] < P->Node.Generic_Word[Aux_Index])
-          {
+          { 
             charDif = P->Node.Generic_Word[Aux_Index];
             break;
           }
@@ -226,8 +226,8 @@ Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree, PATRICIA_Stats *S)
             break;
           }
         }
-      }
-
+      } 
+      // in this function the original tree that will be analyzed, not the copy
       return PATRICIA_Internal_Insert(word, tree, Aux_Index, charDif, S);
     }
   }

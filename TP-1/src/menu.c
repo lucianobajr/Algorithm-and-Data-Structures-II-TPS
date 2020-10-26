@@ -254,7 +254,7 @@ void menu(PATRICIA Patricia_Tree, TSTNode *root)
     }
 }
 
-char *lower(char *word){
+void  lower(char *word){
     for(int i=0;i<strlen(word);i++){
         word[i] = tolower(word[i]);
     }

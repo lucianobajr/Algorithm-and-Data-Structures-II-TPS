@@ -29,10 +29,7 @@ typedef unsigned char TipoDib;
 typedef enum { 
   Internal, External
 } TypeNode; 
-typedef struct Stats{ 
-    int Height;  
-    int Comparisons; 
-}Stats;
+
 typedef struct Node_Type *Pointer; 
 typedef struct Node_Type {
   TypeNode Type;

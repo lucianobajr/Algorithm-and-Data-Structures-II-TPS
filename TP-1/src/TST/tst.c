@@ -17,7 +17,8 @@
 // cria Nó da TST
 TSTNodePointer newNode(char data, TST_Stats *T_S)
 {   
-    struct rusage resource_usage;
+    struct rusage resource_usage; 
+    // collect values to the memory 
     TSTNode *temp = (struct TSTNode *)malloc(sizeof(TSTNode)); 
     int ret = getrusage(RUSAGE_SELF, &resource_usage);
     if (ret == 0) (*T_S).measure_memory += resource_usage.ru_maxrss;
@@ -122,7 +123,7 @@ int searchTST(TSTNodePointer root, char *word, TST_Stats *T_S)
     }
 }
 
-int counterWords(TSTNodePointer root, TST_Stats *T_S)
+void counterWords(TSTNodePointer root, TST_Stats *T_S)
 {
     int counter = 0;
     (*T_S).measure_words = counterWordsUtil(root, 0, &counter);

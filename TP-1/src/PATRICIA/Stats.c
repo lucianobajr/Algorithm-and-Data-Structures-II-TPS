@@ -22,7 +22,7 @@ void Sats_Init(PATRICIA_Stats *S){
     S->measure_comparisons_insert.Compare_insert_index = 0;  
     S->measure_comparisons_insert.Compare_insert_internal_node = 0  ; 
     S->measure_comparisons_insert.Compare_insert_external_node = 0  ; 
-    S->measure_time.time_insertion = 0.0 ; 
+    S->measure_time.time_search = 0.0 ; 
     S->measure_time.time_insertion = 0.0;  
     } 
 /***************************************************************************************************************************************/

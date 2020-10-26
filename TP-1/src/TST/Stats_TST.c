@@ -19,7 +19,7 @@ void TST_Sats_Init(TST_Stats *T_S){
     T_S->measure_memory = 0 ;  
     T_S->measure_comparisons_search = 0   ;  
     T_S->measure_comparisons_insert.Compare_insert_char = 0 ; 
-    T_S->measure_time.time_insertion = 0.0 ; 
+    T_S->measure_time.time_search = 0.0 ; 
     T_S->measure_time.time_insertion = 0.0;  
     } 
 /***************************************************************************************************************************************/
