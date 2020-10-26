@@ -21,7 +21,6 @@
 #include <sys/time.h>
 #include "Stats.h"
 
-#define D 10    
 #define Size 50 
 
 typedef char Key_Word[Size];

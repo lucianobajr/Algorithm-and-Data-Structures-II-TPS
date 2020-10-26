@@ -119,7 +119,10 @@ Pointer PATRICIA_Internal_Insert(Key_Word word, PATRICIA *P, short Index, char D
       return (PATRICIA_Create_Internal_Node(&new_external_node, P, Index, Distinct_char, S));
     }
     return NULL;
-  }
+  } 
+
+
+
   else if (Index < (*P)->Node.Internal_Node.Index)
   {
     (*S).measure_comparisons_insert.Compare_insert_index += 1;
@@ -129,7 +132,10 @@ Pointer PATRICIA_Internal_Insert(Key_Word word, PATRICIA *P, short Index, char D
       return (PATRICIA_Create_Internal_Node(&new_external_node, P, Index, Distinct_char, S));
     else
       return (PATRICIA_Create_Internal_Node(P, &new_external_node, Index, Distinct_char, S));
-  }
+  } 
+
+
+
   else
   {
     (*S).measure_comparisons_insert.Compare_insert_index += 1;
@@ -164,14 +170,11 @@ Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree, PATRICIA_Stats *S)
   {
     PATRICIA P = *tree;
     int Aux_Index;
-    int Last_Index;
     char aux_char;
     // verify  all the internall nodes
     // later this part  can be implemented using PATRICIA search
     while (!PATRICIA_External_Node_Verify(P))
     {
-
-      Last_Index = P->Node.Internal_Node.Index;
       aux_char = word[P->Node.Internal_Node.Index];
 
       if (aux_char < P->Node.Internal_Node.Char_to_Compare)
