@@ -56,7 +56,6 @@ void insert(TSTNodePointer *root, char *word, TST_Stats *T_S)
     {   
         if (*(word + 1)){
             insert(&((*root)->eq), word + 1,T_S);
-            
         }
         // último caractere da palavra
         else{
