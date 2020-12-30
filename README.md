@@ -1,6 +1,6 @@
 # Algorithm-and-Data-Structures-II-TPS
  
-### ESTRUTURA TP-1
+### Estrutura TP-1
 
     |  
     ├── data   
