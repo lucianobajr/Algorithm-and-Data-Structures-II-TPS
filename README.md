@@ -1,21 +1,21 @@
 # Algorithm-and-Data-Structures-II-TPS
  
-ESTRUTURA TP-1
+### ESTRUTURA TP-1
 
-|  
-├── data   
-|   ├──files        # arquivos de teste
-├── src             # Source            
-|   ├──códigos      # códigos fonte     
-├── main.c          # código principal
-├── Makefile        # arquivo para compilação
-|  
+    |  
+    ├── data   
+    |   ├──files        # arquivos de teste
+    ├── src             # Source            
+    |   ├──códigos      # códigos fonte     
+    ├── main.c          # código principal
+    ├── Makefile        # arquivo para compilação
+    |  
 
 ## Menu 
 
 1. Escolha ente PATRICIA e TST
 
-2.Após a escolha anterior, a execução será com base no TAD escolhido, 
+2. Após a escolha anterior, a execução será com base no TAD escolhido, 
 sendo necessário executar novamente o código caso queira utilizar outra opção
 
 3. O menu conta com 5 opções dentre as quais são: (1) Inserir palavra, (2) Ler 
